@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhancement Three: Databases — Braydon Hammond</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="masthead-inner">
+      <p class="eyebrow">Computer Science ePortfolio</p>
+      <h1>Braydon Hammond</h1>
+      <p class="subtitle">Mobile Application Developer &mdash; Android &amp; Java</p>
+      <div class="meta-line">
+        <span>Southern New Hampshire University, B.S. Computer Science</span>
+        <a href="https://github.com/BraydonHammondSNHU" target="_blank" rel="noopener">GitHub: BraydonHammondSNHU</a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html">Home</a>
+      <a href="self-assessment.html">Self-Assessment</a>
+      <a href="enhancement-one.html">Enhancement One</a>
+      <a href="enhancement-two.html">Enhancement Two</a>
+      <a href="enhancement-three.html" class="active">Enhancement Three</a>
+    </div>
+  </nav>
+
+  <main class="essay">
+
+    <a class="back-link" href="index.html">&larr; Back to home</a>
+
+    <p class="eyebrow">Category Three</p>
+    <h2 class="section-title" style="font-size:28px; margin-bottom:6px;">
+      Databases
+    </h2>
+    <p class="subtitle" style="margin-bottom:18px;">Android Inventory Manager &mdash; Normalization &amp; Security</p>
+    <div class="outcome-tags" style="margin-bottom:24px;">
+      <span class="outcome-tag">Course Outcome 4</span>
+      <span class="outcome-tag">Course Outcome 5</span>
+    </div>
+    <hr class="section-rule">
+
+    <section>
+      <h2 class="section-title">Artifact Links</h2>
+      <div class="spec-list">
+        <div class="spec-row">
+          <div class="label">Original</div>
+          <div class="value"><a href="https://github.com/BraydonHammondSNHU/CS-360-InventoryAndroidApplication" target="_blank" rel="noopener">CS-360-InventoryAndroidApplication</a></div>
+        </div>
+        <div class="spec-row">
+          <div class="label">Enhanced</div>
+          <div class="value"><a href="https://github.com/BraydonHammondSNHU/InventoryAppEnhancementThree" target="_blank" rel="noopener">InventoryAppEnhancementThree</a></div>
+        </div>
+        <div class="spec-row">
+          <div class="label">Code Review</div>
+          <div class="value"><a href="https://youtu.be/ffxWrWlbICM" target="_blank" rel="noopener">Recorded walkthrough (video)</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Narrative</h2>
+      <hr class="section-rule">
+
+      <p><strong>Artifact Description.</strong> The artifact is the Android Inventory
+      Manager application originally developed in CS&nbsp;360: Mobile Architecture and
+      Programming. Written in Java for the Android platform, the application allows
+      users to create an account, log in, and manage a personal inventory of items
+      with fields for name, SKU, quantity, and category. The application was
+      originally created during CS&nbsp;360 and has been progressively enhanced
+      across three categories for the CS&nbsp;499 capstone ePortfolio, with this
+      milestone representing the final planned enhancement focused on database design
+      and security.</p>
+
+      <p><strong>Justification and Improvements.</strong> I selected this artifact
+      for the databases category because the original application's data layer had
+      significant and well-defined weaknesses that provided genuine opportunities to
+      demonstrate database design knowledge rather than superficial changes. The
+      original schema was flat and unnormalized, passwords were stored in plaintext,
+      there was no access control beyond a basic username check, and while the
+      queries used parameterized placeholders in some places, the implementation had
+      not been systematically audited for consistency. Each of these issues maps
+      directly to a core database competency, making this artifact an ideal vehicle
+      for demonstrating growth in that area.</p>
+
+      <p>The enhancement introduced four concrete improvements. First, the schema was
+      normalized to Third Normal Form by creating a separate categories table and a
+      suppliers table, with the inventory table referencing both via foreign keys.
+      Previously, category was stored as a free-text string column directly in the
+      inventory table, meaning the same category could be stored as
+      &ldquo;Electronics,&rdquo; &ldquo;electronics,&rdquo; or
+      &ldquo;ELECTRONICS&rdquo; as three separate unrelated values with no
+      enforcement of consistency. Under the new schema, categories exist as unique
+      named records in their own table, and inventory items reference them by foreign
+      key ID. A helper method, <code>getOrCreateCategory()</code>, resolves a
+      category name to its ID idempotently &mdash; creating the category if it does
+      not exist, or returning the existing ID if it does &mdash; so the UI experience
+      is unchanged while the underlying data integrity is enforced. Second, passwords
+      are now hashed using bcrypt before being stored. The original application
+      stored the exact string the user typed as their password, meaning anyone with
+      access to the database file &mdash; possible on a rooted Android device &mdash;
+      could read every user's credentials immediately. The enhanced implementation
+      calls <code>BCrypt.hashpw()</code> with a work factor of 12 at registration
+      time, and <code>BCrypt.checkpw()</code> at login time to compare the plaintext
+      input against the stored hash without ever reversing it. Bcrypt was
+      specifically chosen because it is intentionally slow and incorporates a
+      per-password random salt, which makes both brute-force attacks and rainbow
+      table attacks computationally infeasible. Third, role-based access control was
+      implemented by adding a role column to the users table with two possible
+      values: &ldquo;user&rdquo; and &ldquo;admin.&rdquo; The ViewModel now calls
+      <code>getUserRole()</code> after loading data and routes the query
+      accordingly &mdash; admin users receive all inventory items via
+      <code>getAllItems()</code>, while standard users receive only their own items
+      via <code>getItemsByUser()</code>. This means access control is enforced at the
+      data access layer rather than only at the UI layer, which is a meaningful
+      architectural distinction. Fourth, all database queries were audited and
+      confirmed to use parameterized placeholders, with every user-supplied value
+      passed as a bound argument array rather than concatenated into the SQL string
+      directly. Foreign key enforcement was also enabled explicitly via
+      <code>PRAGMA foreign_keys = ON</code> in both <code>onOpen()</code> and
+      <code>onCreate()</code>, since SQLite does not enforce foreign keys by default.
+      The <code>onUpgrade()</code> method was carefully written to perform all schema
+      changes through <code>ALTER TABLE</code> and <code>INSERT OR IGNORE INTO</code>
+      statements rather than dropping and recreating tables, preserving all existing
+      user data across version increments.</p>
+
+      <p><strong>Course Outcomes.</strong> In Module One I planned for this
+      enhancement to address Course Outcome 4 &mdash; demonstrating the ability to
+      use well-founded and innovative techniques, skills, and tools in computing
+      practices to implement solutions that deliver value and accomplish
+      industry-specific goals &mdash; and Course Outcome 5 &mdash; developing a
+      security mindset that anticipates adversarial exploits in software architecture
+      and designs to expose potential vulnerabilities, mitigate design flaws, and
+      ensure privacy and enhanced security of data and resources.</p>
+
+      <p>Both outcomes were met. Course Outcome 4 is addressed by applying
+      established relational database design principles &mdash; normalization,
+      foreign key constraints, and referential integrity &mdash; to create a more
+      maintainable and scalable data layer. These are not experimental approaches;
+      they are the standard practices used in professional software development, and
+      applying them to a mobile application demonstrates the ability to bring
+      industry-standard database knowledge to bear on a real project. Course Outcome
+      5 is addressed most directly by the bcrypt implementation and the parameterized
+      query audit. The plaintext password storage issue was identified in the code
+      review as the most critical security vulnerability in the application, and
+      resolving it required not just adding a library call but understanding why
+      bcrypt is the appropriate choice &mdash; its work factor, its salting behavior,
+      and the specific attacks it defends against. The role-based access control
+      implementation addresses a different dimension of security: authorization
+      rather than authentication, ensuring that even a logged-in user cannot access
+      data they do not own.</p>
+
+      <p>With this enhancement complete, all five course outcomes are now addressed
+      across the three milestones. Outcomes 3 and 4 are covered by the algorithms and
+      software engineering enhancements respectively, Outcome 5 is covered here, and
+      Outcomes 1 and 2 are addressed through the code review, narratives, and
+      documentation produced throughout the course.</p>
+
+      <p><strong>Reflection.</strong> The most significant learning from this
+      enhancement was developing a concrete understanding of the difference between
+      authentication and authorization, and how they must be implemented at
+      different layers of an application. Before this project, I understood these
+      terms conceptually, but implementing bcrypt for authentication and RBAC for
+      authorization in the same codebase made the distinction tangible.
+      Authentication &mdash; verifying that a user is who they claim to be &mdash; is
+      handled at the point of login by comparing the plaintext input against the
+      stored hash. Authorization &mdash; deciding what a verified user is allowed to
+      do &mdash; is handled at the data access layer by routing queries based on
+      role. Conflating these two concerns, or handling either of them only at the UI
+      layer, would leave meaningful security gaps.</p>
+
+      <p>The bcrypt implementation itself surfaced an interesting challenge. My
+      initial assumption was that password hashing would be straightforward to add,
+      but I quickly discovered that bcrypt's intentional computational cost &mdash;
+      the property that makes it secure &mdash; also means that login verification
+      takes noticeably longer than a simple string comparison. At a work factor of
+      12, each verification call takes roughly 300 to 400 milliseconds on a modern
+      device. For a desktop application this would be invisible, but on a mobile
+      device running on the main thread it is perceptible. The correct solution is to
+      move the bcrypt verification call to a background thread, which is a natural
+      next step toward production readiness. This was a good reminder that security
+      decisions are not made in isolation &mdash; they have performance implications
+      that must be considered and communicated.</p>
+
+      <p>The schema migration was the most technically demanding part of the
+      enhancement. Writing a safe <code>onUpgrade()</code> method that adds new
+      tables, migrates existing data from the old plain-text category column into the
+      new normalized categories table, and then back-fills the foreign key IDs into
+      the inventory table &mdash; all without losing a single row of user data
+      &mdash; required careful ordering of operations and testing against an actual
+      existing database. The instinct when dealing with a schema change is to simply
+      drop and recreate everything, and the original <code>onUpgrade()</code> in the
+      CS&nbsp;360 project did exactly that. Learning to write incremental,
+      data-preserving migrations is the kind of skill that separates a developer who
+      has only built greenfield projects from one who understands the full lifecycle
+      of a production application.</p>
+    </section>
+
+    <div class="spec-list" style="margin-top:36px;">
+      <div class="spec-row">
+        <div class="label">Back to</div>
+        <div class="value">
+          <a href="self-assessment.html">Professional Self-Assessment</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>&copy; 2026 Braydon Hammond</span>
+      <span>CS 499 Capstone &mdash; Southern New Hampshire University</span>
+    </div>
+  </footer>
+
+</body>
+</html>
