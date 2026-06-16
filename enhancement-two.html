@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhancement Two: Algorithms &amp; Data Structures — Braydon Hammond</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="masthead-inner">
+      <p class="eyebrow">Computer Science ePortfolio</p>
+      <h1>Braydon Hammond</h1>
+      <p class="subtitle">Mobile Application Developer &mdash; Android &amp; Java</p>
+      <div class="meta-line">
+        <span>Southern New Hampshire University, B.S. Computer Science</span>
+        <a href="https://github.com/BraydonHammondSNHU" target="_blank" rel="noopener">GitHub: BraydonHammondSNHU</a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html">Home</a>
+      <a href="self-assessment.html">Self-Assessment</a>
+      <a href="enhancement-one.html">Enhancement One</a>
+      <a href="enhancement-two.html" class="active">Enhancement Two</a>
+      <a href="enhancement-three.html">Enhancement Three</a>
+    </div>
+  </nav>
+
+  <main class="essay">
+
+    <a class="back-link" href="index.html">&larr; Back to home</a>
+
+    <p class="eyebrow">Category Two</p>
+    <h2 class="section-title" style="font-size:28px; margin-bottom:6px;">
+      Algorithms &amp; Data Structures
+    </h2>
+    <p class="subtitle" style="margin-bottom:18px;">Android Inventory Manager &mdash; Search, Sort &amp; Prioritization</p>
+    <div class="outcome-tags" style="margin-bottom:24px;">
+      <span class="outcome-tag">Course Outcome 3</span>
+      <span class="outcome-tag">Course Outcome 4</span>
+    </div>
+    <hr class="section-rule">
+
+    <section>
+      <h2 class="section-title">Artifact Links</h2>
+      <div class="spec-list">
+        <div class="spec-row">
+          <div class="label">Original</div>
+          <div class="value"><a href="https://github.com/BraydonHammondSNHU/CS-360-InventoryAndroidApplication" target="_blank" rel="noopener">CS-360-InventoryAndroidApplication</a></div>
+        </div>
+        <div class="spec-row">
+          <div class="label">Enhanced</div>
+          <div class="value"><a href="https://github.com/BraydonHammondSNHU/InventoryAppEnhancementTwo" target="_blank" rel="noopener">InventoryAppEnhancementTwo</a></div>
+        </div>
+        <div class="spec-row">
+          <div class="label">Code Review</div>
+          <div class="value"><a href="https://youtu.be/ffxWrWlbICM" target="_blank" rel="noopener">Recorded walkthrough (video)</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Narrative</h2>
+      <hr class="section-rule">
+
+      <p><strong>Artifact Description.</strong> The artifact is the Android Inventory
+      Manager application I originally developed in CS&nbsp;360: Mobile Architecture
+      and Programming. Written in Java for the Android platform, the application
+      allows users to create an account, log in, and manage a personal inventory of
+      items, each with a name, SKU, quantity, and category. Users can add new items,
+      update quantities, delete records, and receive SMS notifications when stock
+      falls below a defined threshold. The application was originally created during
+      CS&nbsp;360 and has since been enhanced across multiple categories for the
+      CS&nbsp;499 capstone ePortfolio.</p>
+
+      <p><strong>Justification and Improvements.</strong> I selected this artifact for
+      the algorithms and data structures category because the original application
+      had meaningful and demonstrable inefficiencies in how it handled data
+      retrieval, filtering, and display &mdash; and because fixing those
+      inefficiencies gave me a genuine opportunity to apply specific data structure
+      concepts rather than making cosmetic changes. The original application loaded
+      all inventory items from the database with a full table scan on every screen
+      refresh, maintained no in-memory data model, and provided no way for a user to
+      search or sort the list. These were not just design limitations; they were
+      algorithmic problems with measurable solutions.</p>
+
+      <p>The enhancement introduced four concrete algorithm and data structure
+      improvements. First, I implemented a HashMap index that maps each item's
+      lowercase name to its corresponding Item object. This index is rebuilt in O(n)
+      time whenever the item list is reloaded, and it enables O(1) average-case
+      lookup when a user searches by exact name, compared to the O(n) linear scan
+      that would otherwise be required. Second, I implemented three sort modes
+      &mdash; alphabetical by name, quantity ascending, and quantity descending
+      &mdash; using Java's <code>Collections.sort()</code> with appropriate
+      Comparators. The Item class was updated to implement
+      <code>Comparable&lt;Item&gt;</code> so that the default alphabetical sort uses
+      the natural ordering defined on the class itself, while the two quantity-based
+      sorts use lambda Comparators. All three sorts run in O(n&nbsp;log&nbsp;n) time
+      via Java's TimSort implementation. Third, I implemented a min-heap using Java's
+      <code>PriorityQueue</code> ordered by quantity ascending to surface the
+      lowest-stock items. All n items are inserted in O(n&nbsp;log&nbsp;n) total, and
+      the top-k lowest-quantity items are extracted in O(k&nbsp;log&nbsp;n), making
+      this more efficient than a full sort when only a small subset of results is
+      needed. The results are displayed in a low-stock banner that appears
+      automatically when items fall below the threshold. Fourth, the search field
+      already present in the layout was wired to the ViewModel through a
+      TextWatcher, routing each keystroke to either the O(1) HashMap exact match or
+      an O(n) prefix scan fallback, giving users real-time filtering without
+      repeated database queries. All complexity analysis is documented inline
+      throughout the ViewModel code.</p>
+
+      <p><strong>Course Outcomes.</strong> In Module One I planned for this
+      enhancement to address Course Outcome 3 &mdash; designing and evaluating
+      computing solutions that solve a given problem using algorithmic principles
+      and computer science practices and standards appropriate to its solution,
+      while managing the trade-offs involved in design choices &mdash; and Course
+      Outcome 4 &mdash; demonstrating an ability to use well-founded and innovative
+      techniques, skills, and tools in computing practices for the purpose of
+      implementing computer solutions that deliver value and accomplish
+      industry-specific goals.</p>
+
+      <p>Both outcomes were met. Course Outcome 3 is addressed most directly by the
+      explicit trade-off analysis embedded in the implementation: the HashMap
+      provides O(1) lookup at the cost of O(n) additional memory and the overhead of
+      rebuilding the index on each load. The min-heap provides O(k&nbsp;log&nbsp;n)
+      extraction of the top-k items without requiring a full sort, which is
+      advantageous when k is small relative to n. These are not arbitrary choices
+      &mdash; they are deliberate algorithmic decisions with documented reasoning,
+      which is exactly what Outcome 3 requires. Course Outcome 4 is addressed by
+      applying established computer science data structures &mdash; hash maps,
+      priority queues, and comparator-based sorting &mdash; to a real mobile
+      application in a way that delivers tangible user-facing value in the form of
+      search and sort functionality.</p>
+
+      <p>I have no significant updates to my outcome-coverage plan. Course Outcomes
+      1 and 2 continue to be addressed through the code review, narratives, and
+      documentation. Course Outcome 5 remains tied to the database enhancement.</p>
+
+      <p><strong>Reflection.</strong> The most important thing I learned through this
+      enhancement is the difference between knowing what a data structure does and
+      knowing when and why to choose it. I was familiar with HashMaps and priority
+      queues before starting this milestone, but working through the actual
+      implementation forced me to think carefully about the specific access patterns
+      of an inventory application and match the right structure to each one. A user
+      searching by name has a fundamentally different access pattern than a user
+      scanning for low-stock items, and the fact that those two problems call for
+      different solutions &mdash; a hash map for the first, a heap for the second
+      &mdash; was something I understood abstractly but had not previously applied in
+      a concrete project.</p>
+
+      <p>The most challenging part of the enhancement was implementing the search
+      correctly. My initial instinct was to run all searches through the HashMap, but
+      I quickly realized that a HashMap can only return an exact match &mdash; if a
+      user types &ldquo;ham&rdquo; looking for &ldquo;Hammer,&rdquo; the HashMap
+      returns nothing. The solution was a two-tier approach: attempt the O(1) HashMap
+      lookup first, and if it misses, fall back to an O(n) prefix scan. Documenting
+      why this fallback exists and what its cost is was as important as implementing
+      it, because the whole point of the complexity analysis in the narrative and
+      code comments is to show that the trade-off was understood, not just that the
+      feature works. Another challenge was integrating the min-heap with the LiveData
+      architecture from the Software Engineering enhancement. The heap needs to
+      operate on the in-memory master list rather than querying the database again,
+      which required careful sequencing inside <code>loadItemsForUser()</code> to
+      ensure the heap is always rebuilt from the most current data. Getting that
+      ordering right &mdash; load cursor, build master list, build HashMap index,
+      sort, post to LiveData, rebuild heap, post to low-stock LiveData &mdash; took
+      more careful thought than I anticipated, but the result is a clean,
+      deterministic update sequence that keeps all derived data structures in sync
+      with the underlying source of truth.</p>
+    </section>
+
+    <div class="spec-list" style="margin-top:36px;">
+      <div class="spec-row">
+        <div class="label">Next</div>
+        <div class="value">
+          <a href="enhancement-three.html">Enhancement Three &mdash; Databases &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>&copy; 2026 Braydon Hammond</span>
+      <span>CS 499 Capstone &mdash; Southern New Hampshire University</span>
+    </div>
+  </footer>
+
+</body>
+</html>
