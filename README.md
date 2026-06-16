@@ -1,5 +1,3 @@
-# BraydonHammondSNHU.github.io
-
 # Braydon Hammond — Computer Science ePortfolio
 
 This repository hosts my CS 499 Computer Science Capstone ePortfolio, built for Southern New Hampshire University's Bachelor of Science in Computer Science program. The site is published via GitHub Pages at:
