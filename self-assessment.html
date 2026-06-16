@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Self-Assessment — Braydon Hammond</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="masthead-inner">
+      <p class="eyebrow">Computer Science ePortfolio</p>
+      <h1>Braydon Hammond</h1>
+      <p class="subtitle">Mobile Application Developer &mdash; Android &amp; Java</p>
+      <div class="meta-line">
+        <span>Southern New Hampshire University, B.S. Computer Science</span>
+        <a href="https://github.com/BraydonHammondSNHU" target="_blank" rel="noopener">GitHub: BraydonHammondSNHU</a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html">Home</a>
+      <a href="self-assessment.html" class="active">Self-Assessment</a>
+      <a href="enhancement-one.html">Enhancement One</a>
+      <a href="enhancement-two.html">Enhancement Two</a>
+      <a href="enhancement-three.html">Enhancement Three</a>
+    </div>
+  </nav>
+
+  <main class="essay">
+
+    <a class="back-link" href="index.html">&larr; Back to home</a>
+
+    <p class="eyebrow">Professional Self-Assessment</p>
+    <h2 class="section-title" style="font-size:28px; margin-bottom:24px;">
+      Reflections on the Capstone and the Computer Science Program
+    </h2>
+    <hr class="section-rule">
+
+    <p>
+      Completing the Bachelor of Science in Computer Science program at Southern New
+      Hampshire University, and particularly the process of building this ePortfolio,
+      has been the most clarifying experience of my academic career. Where coursework
+      taught me individual skills in isolation &mdash; a data structure in one course,
+      a database technique in another, a mobile framework in a third &mdash; this
+      capstone forced me to integrate them into a single, cohesive body of work and,
+      in doing so, revealed exactly what kind of computer scientist I have become and
+      want to be. My target specialization is mobile application development, and
+      every stage of this program, from early coursework through the final enhancement
+      of my capstone artifact, has sharpened both my technical ability and my
+      understanding of what professional-quality software actually requires.
+    </p>
+
+    <p>
+      Collaboration has been a consistent thread throughout the program, even in a
+      primarily independent course of study. In CS&nbsp;250: Software Development
+      Lifecycle, I worked through a full Agile/Scrum simulation, taking on sprint
+      planning, backlog grooming, and retrospective roles that mirror how real
+      engineering teams operate. That experience shaped my understanding that software
+      development is rarely a solitary act of writing code; it is a coordinated
+      process of negotiating priorities, communicating status, and adjusting plans as
+      new information emerges. I carried that mindset directly into this capstone,
+      where the code review video I produced for Milestone One was itself an exercise
+      in collaborative communication &mdash; presenting technical analysis to an
+      audience of peers and managers who needed to understand not just what the code
+      did, but why specific enhancements were necessary and how they would be
+      prioritized.
+    </p>
+
+    <p>
+      Communicating with stakeholders is a skill I have developed through every
+      written deliverable in this program, from project proposals to the journal
+      entries and milestone narratives required throughout this capstone. I have
+      learned that effective technical communication means adjusting the level of
+      detail and vocabulary to the audience: a deeply technical explanation that works
+      for a fellow developer would overwhelm a project stakeholder who only needs to
+      understand impact and risk. The narratives I wrote for each of my three
+      enhancements were deliberately structured to serve both audiences at once,
+      leading with plain-language justification before descending into implementation
+      detail.
+    </p>
+
+    <blockquote class="pull">
+      Understanding why a structure is appropriate is just as important as knowing
+      how to implement it.
+    </blockquote>
+
+    <p>
+      Data structures and algorithms represent one of the strongest technical threads
+      in my education. Coursework in CS&nbsp;260: Data Structures and Algorithms gave
+      me a rigorous foundation in complexity analysis, search and sort algorithms, and
+      the trade-offs between different structures for different access patterns. I put
+      that foundation into direct practice in this capstone by implementing a
+      HashMap-based search index, three distinct sorting strategies using Java's
+      Comparator interface, and a min-heap built on a PriorityQueue to prioritize
+      low-stock inventory alerts. Each of these was not simply implemented but
+      documented with explicit time complexity analysis, because I believe that
+      understanding why a structure is appropriate is just as important as knowing how
+      to implement it.
+    </p>
+
+    <p>
+      Software engineering and database design are the two areas where I have grown
+      the most over the course of this capstone specifically. Refactoring my Android
+      Inventory Manager application to follow the MVVM architecture pattern,
+      introducing a proper ViewModel layer with LiveData, and replacing an inefficient
+      view-inflation loop with a RecyclerView taught me the practical difference
+      between code that works and code that is engineered to scale and remain
+      maintainable. On the database side, normalizing a flat schema to Third Normal
+      Form, replacing plaintext password storage with bcrypt hashing, and implementing
+      role-based access control gave me hands-on experience with the kind of data
+      layer decisions that separate a student project from a production-ready
+      application.
+    </p>
+
+    <p>
+      Security, finally, has become a mindset rather than a checklist item for me.
+      Identifying the plaintext password vulnerability in my own prior coursework
+      during the code review process, and then understanding precisely why bcrypt's
+      salting and intentional computational cost defend against the specific attacks
+      that threaten stored credentials, taught me that security cannot be bolted on
+      after the fact. It has to be a consideration at every layer of design, from how
+      a query is constructed to how an authorization check is enforced.
+    </p>
+
+    <h2 class="section-title">How the Artifacts Fit Together</h2>
+    <hr class="section-rule">
+
+    <p>
+      The artifacts that follow this self-assessment all originate from a single
+      application: an Android Inventory Manager originally built in CS&nbsp;360,
+      Mobile Architecture and Programming. I chose to enhance one artifact across all
+      three required categories rather than three separate projects because doing so
+      allowed me to demonstrate something a collection of disconnected examples could
+      not: the ability to take a single piece of software through a complete,
+      professional-grade transformation.
+    </p>
+
+    <p>
+      The <strong>Software Engineering and Design</strong> enhancement restructured
+      the application's architecture from a tangle of Activity-embedded logic into a
+      properly separated MVVM design with an efficient RecyclerView-based interface
+      and real session management. The <strong>Algorithms and Data Structures</strong>
+      enhancement built on that new architecture to add a HashMap-indexed search
+      feature, multiple sorting strategies, and a min-heap-driven low-stock alert
+      system, each with documented complexity analysis. The <strong>Databases</strong>
+      enhancement completed the transformation by normalizing the underlying schema,
+      securing user credentials with bcrypt hashing, enforcing role-based access
+      control, and auditing every query for parameterization to eliminate injection
+      vulnerabilities.
+    </p>
+
+    <p>
+      Read together, these three enhancements tell the story of a single application
+      evolving from a functional but architecturally flat student project into a
+      structured, efficient, and secure piece of software that reflects the standards
+      of professional mobile development. I invite you to explore each artifact and
+      its accompanying narrative in the sections that follow, where the specific
+      technical decisions, the reasoning behind them, and the lessons learned
+      throughout the process are documented in full detail.
+    </p>
+
+    <div class="spec-list" style="margin-top:36px;">
+      <div class="spec-row">
+        <div class="label">Next</div>
+        <div class="value">
+          <a href="enhancement-one.html">Enhancement One &mdash; Software Design &amp; Engineering &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>&copy; 2026 Braydon Hammond</span>
+      <span>CS 499 Capstone &mdash; Southern New Hampshire University</span>
+    </div>
+  </footer>
+
+</body>
+</html>
