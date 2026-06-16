@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhancement One: Software Design &amp; Engineering — Braydon Hammond</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="masthead-inner">
+      <p class="eyebrow">Computer Science ePortfolio</p>
+      <h1>Braydon Hammond</h1>
+      <p class="subtitle">Mobile Application Developer &mdash; Android &amp; Java</p>
+      <div class="meta-line">
+        <span>Southern New Hampshire University, B.S. Computer Science</span>
+        <a href="https://github.com/BraydonHammondSNHU" target="_blank" rel="noopener">GitHub: BraydonHammondSNHU</a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html">Home</a>
+      <a href="self-assessment.html">Self-Assessment</a>
+      <a href="enhancement-one.html" class="active">Enhancement One</a>
+      <a href="enhancement-two.html">Enhancement Two</a>
+      <a href="enhancement-three.html">Enhancement Three</a>
+    </div>
+  </nav>
+
+  <main class="essay">
+
+    <a class="back-link" href="index.html">&larr; Back to home</a>
+
+    <p class="eyebrow">Category One</p>
+    <h2 class="section-title" style="font-size:28px; margin-bottom:6px;">
+      Software Design &amp; Engineering
+    </h2>
+    <p class="subtitle" style="margin-bottom:18px;">Android Inventory Manager &mdash; MVVM Refactor</p>
+    <div class="outcome-tags" style="margin-bottom:24px;">
+      <span class="outcome-tag">Course Outcome 2</span>
+      <span class="outcome-tag">Course Outcome 4</span>
+    </div>
+    <hr class="section-rule">
+
+    <section>
+      <h2 class="section-title">Artifact Links</h2>
+      <div class="spec-list">
+        <div class="spec-row">
+          <div class="label">Original</div>
+          <div class="value"><a href="https://github.com/BraydonHammondSNHU/CS-360-InventoryAndroidApplication" target="_blank" rel="noopener">CS-360-InventoryAndroidApplication</a></div>
+        </div>
+        <div class="spec-row">
+          <div class="label">Enhanced</div>
+          <div class="value"><a href="https://github.com/BraydonHammondSNHU/InventoryAppEnhancementOne" target="_blank" rel="noopener">InventoryAppEnhancementOne</a></div>
+        </div>
+        <div class="spec-row">
+          <div class="label">Code Review</div>
+          <div class="value"><a href="https://youtu.be/ffxWrWlbICM" target="_blank" rel="noopener">Recorded walkthrough (video)</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Narrative</h2>
+      <hr class="section-rule">
+
+      <p><strong>Artifact Description.</strong> The artifact is an Android Inventory
+      Manager application I developed in CS&nbsp;360: Mobile Architecture and
+      Programming. The application was written in Java and targets the Android
+      platform. It allows users to create an account, log in, and manage a personal
+      inventory of items &mdash; each with a name, SKU, quantity, and category. Users
+      can add new items, update quantities, delete records, and receive SMS
+      notifications when stock falls below a defined threshold. The application was
+      originally created during CS&nbsp;360 and represented a complete, functional
+      Android app, making it a strong candidate for enhancement across all three
+      ePortfolio categories.</p>
+
+      <p><strong>Justification and Improvements.</strong> I selected this artifact
+      because it is the most direct demonstration of my target career skill set
+      &mdash; Android mobile development in Java &mdash; and because it had clear,
+      meaningful room for improvement in each of the three computer science
+      categories. For the software engineering enhancement specifically, the original
+      application had a significant architectural limitation: all business logic,
+      database access, and UI rendering were handled directly inside the Activity
+      classes. This violates the single-responsibility principle and makes the code
+      difficult to test, maintain, or extend.</p>
+
+      <p>The enhancement I implemented transformed the application's architecture in
+      several concrete ways. First, I introduced the MVVM pattern by creating an
+      <code>InventoryViewModel</code> class that holds all business logic and exposes
+      the item list to the UI through <code>LiveData</code>. The
+      <code>DashboardActivity</code> now simply observes the LiveData stream and
+      updates the screen when data changes, rather than managing database cursors
+      directly. Second, I replaced the original LinearLayout inflation loop &mdash;
+      which created every list item view at once regardless of whether it was on
+      screen &mdash; with a <code>RecyclerView</code> backed by a custom
+      <code>InventoryAdapter</code>. RecyclerView only creates as many view objects as
+      fit on screen and reuses them as the user scrolls, making the list significantly
+      more memory-efficient and scalable. Third, I implemented session management by
+      adding a <code>getUserId()</code> method to <code>DatabaseHelper</code> and
+      passing the logged-in user's ID through Intent extras between screens. This
+      means every screen now knows which user is active, and inventory items are
+      filtered and stored by owner rather than shared globally. Fourth, all column
+      name constants in <code>DatabaseHelper</code> were made public so that other
+      classes reference them directly rather than duplicating string literals,
+      eliminating a class of potential runtime errors. Fifth, I added an
+      <code>owner_id</code> foreign key column to the inventory table and wrote a safe
+      <code>onUpgrade</code> migration that preserves existing data rather than
+      dropping and recreating tables. Sixth, I consolidated the redundant
+      <code>NotificationActivity</code> &mdash; its SMS logic was duplicated from
+      <code>DashboardActivity</code> without adding any value &mdash; and removed it
+      entirely. Finally, I added Javadoc documentation to every public class and
+      method, and wrote fourteen instrumented unit tests covering all of
+      <code>DatabaseHelper</code>'s public methods, including edge cases like
+      duplicate usernames, negative quantities, and non-existent record deletions.</p>
+
+      <p><strong>Course Outcomes.</strong> In Module One I planned for this
+      enhancement to address Course Outcome 4 &mdash; demonstrating the ability to use
+      well-founded and innovative techniques, skills, and tools in computing practices
+      to implement solutions that deliver value and accomplish industry-specific goals
+      &mdash; and Course Outcome 2 &mdash; designing and delivering professional-quality
+      written communications that are coherent and technically sound.</p>
+
+      <p>I believe both outcomes were met. The MVVM refactor, RecyclerView adoption,
+      session management implementation, and safe database migration all reflect
+      established, industry-standard Android development practices. These are not
+      superficial changes; they represent the architectural decisions a professional
+      Android developer would make when taking a proof-of-concept application toward
+      production quality. The Javadoc documentation and unit tests directly support
+      Outcome 2 by making the codebase readable and verifiable for any developer who
+      encounters it.</p>
+
+      <p>I do have one update to my outcome-coverage plan. I originally noted that
+      Course Outcome 1 &mdash; building collaborative environments that enable
+      diverse audiences to support organizational decision making &mdash; would be
+      addressed primarily through the code review and self-assessment. Having now
+      added thorough Javadoc to every class and method, I believe this enhancement
+      also partially contributes to Outcome 1, since well-documented code is itself a
+      collaborative artifact that enables other developers to understand, maintain,
+      and build on the work.</p>
+
+      <p><strong>Reflection.</strong> The most significant learning experience in this
+      enhancement was internalizing the practical difference between MVVM as a concept
+      and MVVM as an implementation. I understood the pattern in theory before
+      starting, but working through the actual wiring &mdash; creating the
+      ViewModel, connecting it to LiveData, and having the Activity observe that data
+      rather than fetch it directly &mdash; required a much more careful understanding
+      of Android's lifecycle than I had going in. The moment that required the most
+      thought was realizing that <code>loadItemsForUser()</code> needed to be called
+      in <code>onResume()</code> as well as <code>onCreate()</code>, because when a
+      user adds an item in <code>AddItemActivity</code> and navigates back, the
+      Dashboard Activity is not recreated &mdash; it resumes. Without the
+      <code>onResume</code> call, the new item would be saved to the database but
+      never appear in the list, which was exactly the bug I encountered during
+      testing.</p>
+
+      <p>The RecyclerView adapter was also more involved than I anticipated. The
+      original LinearLayout approach felt simpler on the surface because everything
+      happened in one place, but that simplicity was deceptive &mdash; it was hiding a
+      scalability problem. Writing a proper ViewHolder and binding pattern forced me
+      to think more carefully about the separation between data and presentation,
+      which reinforced why the MVVM pattern exists in the first place.</p>
+
+      <p>The biggest challenge overall was the database migration. Adding the
+      <code>owner_id</code> column to an existing schema required writing an
+      <code>onUpgrade</code> method that altered the table rather than dropping and
+      recreating it. Getting the SQL syntax correct for SQLite's
+      <code>ALTER TABLE ADD COLUMN</code> and ensuring the default value was set
+      appropriately took careful attention. This was a good reminder that in
+      real-world development, schema changes must be handled with far more care than
+      in initial development, because existing user data cannot simply be discarded.</p>
+
+      <p>By the end of this enhancement, the application had evolved from a functional
+      but architecturally flat student project into a structured, maintainable
+      codebase that reflects how professional Android applications are actually
+      built. That gap between &ldquo;it works&rdquo; and &ldquo;it's well-engineered&rdquo;
+      is something I now understand much more concretely than I did before.</p>
+    </section>
+
+    <div class="spec-list" style="margin-top:36px;">
+      <div class="spec-row">
+        <div class="label">Next</div>
+        <div class="value">
+          <a href="enhancement-two.html">Enhancement Two &mdash; Algorithms &amp; Data Structures &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>&copy; 2026 Braydon Hammond</span>
+      <span>CS 499 Capstone &mdash; Southern New Hampshire University</span>
+    </div>
+  </footer>
+
+</body>
+</html>
