@@ -1,19 +1,153 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Braydon's Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Braydon Hammond — Computer Science ePortfolio</title>
+  <meta name="description" content="CS 499 Capstone ePortfolio — Braydon Hammond, Southern New Hampshire University. Android mobile development, software engineering, algorithms, and database design.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Welcome to my portfolio!</h1>
-    <p>SNHU Computer Science Student</p>
 
-    <h2>Projects</h2>
-    <ul>
-        <li><a href="https://github.com/BraydonHammondSNHU/CS-360-InventoryAndroidApplication">Inventory App - Original</a></li>
-        <li><a href="https://youtu.be/ffxWrWlbICM">Inventory App - Code Review Video</a></li>
-        <li><a href="https://github.com/BraydonHammondSNHU/InventoryAppEnhancementOne">Inventory App Enhancement One - Software Design & Engineering</a></li>
-        <li><a href="https://github.com/BraydonHammondSNHU/InventoryAppEnhancementTwo">Inventory App Enhancement Two - Algorithms & Data Structures</a></li>
-        <li><a href="https://github.com/BraydonHammondSNHU/InventoryAppEnhancementThree">Inventory App Enhancement Three - Databases</a></li>
-    </ul>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <p class="eyebrow">Computer Science ePortfolio</p>
+      <h1>Braydon Hammond</h1>
+      <p class="subtitle">Mobile Application Developer &mdash; Android &amp; Java</p>
+      <div class="meta-line">
+        <span>Southern New Hampshire University, B.S. Computer Science</span>
+        <a href="https://github.com/BraydonHammondSNHU" target="_blank" rel="noopener">GitHub: BraydonHammondSNHU</a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="active">Home</a>
+      <a href="self-assessment.html">Self-Assessment</a>
+      <a href="enhancement-one.html">Enhancement One</a>
+      <a href="enhancement-two.html">Enhancement Two</a>
+      <a href="enhancement-three.html">Enhancement Three</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <section>
+      <h2 class="section-title">Overview</h2>
+      <hr class="section-rule">
+      <p>
+        This ePortfolio documents the culmination of my Computer Science coursework at
+        Southern New Hampshire University, presented as a single capstone case study:
+        the progressive enhancement of one Android application across the three
+        foundational areas of the discipline &mdash; software engineering and design,
+        algorithms and data structures, and databases.
+      </p>
+      <p>
+        Begin with the <a href="self-assessment.html">Professional Self-Assessment</a>
+        for a full introduction to my background, skills, and how the artifacts below
+        fit together. Each enhancement page includes the original and enhanced source
+        code, a recorded code review, and a written narrative reflecting on the process.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="section-title">The Artifact</h2>
+      <hr class="section-rule">
+      <p>
+        All three enhancements below are applied to a single artifact: an
+        <strong>Android Inventory Manager</strong>, originally built in Java for
+        CS&nbsp;360 (Mobile Architecture and Programming). The application allows a
+        user to log in, manage a personal inventory of items, and receive low-stock
+        alerts. Rather than enhancing three unrelated class projects, I chose to take
+        this one application through a complete, professional-grade transformation
+        &mdash; the same way a real piece of software might evolve from a prototype
+        into a production-ready product.
+      </p>
+      <div class="spec-list">
+        <div class="spec-row">
+          <div class="label">Original</div>
+          <div class="value">
+            <a href="https://github.com/BraydonHammondSNHU/CS-360-InventoryAndroidApplication" target="_blank" rel="noopener">CS-360-InventoryAndroidApplication</a>
+            <span class="desc">Source code as submitted for CS 360, prior to any CS 499 enhancement.</span>
+          </div>
+        </div>
+        <div class="spec-row">
+          <div class="label">Code Review</div>
+          <div class="value">
+            <a href="https://youtu.be/ffxWrWlbICM" target="_blank" rel="noopener">Recorded walkthrough (video)</a>
+            <span class="desc">Informal review of the original code's structure, logic, and security, with a plan for enhancement.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Enhancements</h2>
+      <hr class="section-rule">
+
+      <article class="artifact-card">
+        <p class="cat-number">Category One</p>
+        <h3>Software Design &amp; Engineering</h3>
+        <p>
+          Refactored the application to follow the MVVM architecture pattern,
+          replaced an inefficient view-inflation loop with a RecyclerView and
+          custom Adapter, and implemented real session management between screens.
+        </p>
+        <div class="outcome-tags">
+          <span class="outcome-tag">Outcome 2</span>
+          <span class="outcome-tag">Outcome 4</span>
+        </div>
+        <div class="card-links" style="margin-top:14px;">
+          <a href="enhancement-one.html">Read narrative &amp; view code &rarr;</a>
+        </div>
+      </article>
+
+      <article class="artifact-card">
+        <p class="cat-number">Category Two</p>
+        <h3>Algorithms &amp; Data Structures</h3>
+        <p>
+          Implemented a HashMap-backed search index, three Comparator-based sort
+          modes, and a min-heap (PriorityQueue) to prioritize low-stock items,
+          each with documented time complexity analysis.
+        </p>
+        <div class="outcome-tags">
+          <span class="outcome-tag">Outcome 3</span>
+          <span class="outcome-tag">Outcome 4</span>
+        </div>
+        <div class="card-links" style="margin-top:14px;">
+          <a href="enhancement-two.html">Read narrative &amp; view code &rarr;</a>
+        </div>
+      </article>
+
+      <article class="artifact-card">
+        <p class="cat-number">Category Three</p>
+        <h3>Databases</h3>
+        <p>
+          Normalized the schema to Third Normal Form, replaced plaintext password
+          storage with bcrypt hashing, implemented role-based access control, and
+          audited every query for parameterization.
+        </p>
+        <div class="outcome-tags">
+          <span class="outcome-tag">Outcome 4</span>
+          <span class="outcome-tag">Outcome 5</span>
+        </div>
+        <div class="card-links" style="margin-top:14px;">
+          <a href="enhancement-three.html">Read narrative &amp; view code &rarr;</a>
+        </div>
+      </article>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>&copy; 2026 Braydon Hammond</span>
+      <span>CS 499 Capstone &mdash; Southern New Hampshire University</span>
+    </div>
+  </footer>
+
 </body>
 </html>
