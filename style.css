@@ -1,0 +1,331 @@
+/* ===========================================================
+   Braydon Hammond — ePortfolio Stylesheet
+   =========================================================== */
+
+:root {
+  --navy: #1B2A4A;
+  --slate: #3D4F6B;
+  --paper: #FAFAF8;
+  --gold: #9C7A3C;
+  --charcoal: #2A2A2A;
+  --hairline: #D8D4CC;
+  --hairline-strong: #B8B2A4;
+
+  --serif: "Source Serif Pro", "Georgia", "Iowan Old Style", serif;
+  --sans: -apple-system, "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", "SF Mono", Consolas, monospace;
+
+  --max-width: 760px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--charcoal);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--navy);
+  text-decoration: none;
+  border-bottom: 1px solid var(--hairline-strong);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+a:hover,
+a:focus {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+
+/* ── Header / masthead ─────────────────────────────────────── */
+
+.masthead {
+  border-bottom: 3px double var(--navy);
+  padding: 48px 24px 28px;
+  background: var(--paper);
+}
+
+.masthead-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 10px;
+  font-weight: 600;
+}
+
+.masthead h1 {
+  font-family: var(--serif);
+  font-size: 38px;
+  font-weight: 600;
+  color: var(--navy);
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+}
+
+.masthead .subtitle {
+  font-size: 17px;
+  color: var(--slate);
+  margin: 0 0 18px;
+}
+
+.masthead .meta-line {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--slate);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.masthead .meta-line a {
+  border-bottom: 1px dotted var(--hairline-strong);
+}
+
+/* ── Nav ────────────────────────────────────────────────────── */
+
+nav.site-nav {
+  border-bottom: 1px solid var(--hairline);
+  background: #F4F1EA;
+}
+
+nav.site-nav .nav-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  gap: 28px;
+  padding: 0 24px;
+  flex-wrap: wrap;
+}
+
+nav.site-nav a {
+  display: inline-block;
+  padding: 14px 0;
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--slate);
+  border-bottom: 2px solid transparent;
+}
+
+nav.site-nav a:hover,
+nav.site-nav a.active {
+  color: var(--navy);
+  border-bottom-color: var(--gold);
+}
+
+/* ── Main content ───────────────────────────────────────────── */
+
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 44px 24px 80px;
+}
+
+section {
+  margin-bottom: 44px;
+}
+
+h2.section-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--navy);
+  margin: 0 0 6px;
+  font-weight: 600;
+}
+
+.section-rule {
+  border: none;
+  border-top: 1px solid var(--hairline);
+  margin: 0 0 24px;
+}
+
+p {
+  margin: 0 0 16px;
+}
+
+/* ── Spec / record list (artifact links, structured rows) ───── */
+
+.spec-list {
+  border-top: 1px solid var(--hairline);
+}
+
+.spec-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 18px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--hairline);
+  align-items: baseline;
+}
+
+.spec-row .label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding-top: 2px;
+}
+
+.spec-row .value a {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.spec-row .value .desc {
+  display: block;
+  font-size: 14px;
+  color: var(--slate);
+  margin-top: 4px;
+  border: none;
+}
+
+/* ── Outcome tags ───────────────────────────────────────────── */
+
+.outcome-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 0;
+}
+
+.outcome-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  color: var(--navy);
+  border: 1px solid var(--hairline-strong);
+  background: #F4F1EA;
+  padding: 4px 9px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+/* ── Artifact cards (home page grid of 3 enhancements) ───────── */
+
+.artifact-card {
+  border: 1px solid var(--hairline);
+  border-left: 3px solid var(--navy);
+  padding: 22px 24px;
+  margin-bottom: 16px;
+  background: #fff;
+}
+
+.artifact-card .cat-number {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+
+.artifact-card h3 {
+  font-family: var(--serif);
+  font-size: 19px;
+  margin: 0 0 8px;
+  color: var(--navy);
+}
+
+.artifact-card p {
+  font-size: 14.5px;
+  color: var(--charcoal);
+  margin-bottom: 12px;
+}
+
+.artifact-card .card-links {
+  display: flex;
+  gap: 20px;
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+
+footer {
+  border-top: 1px solid var(--hairline);
+  padding: 28px 24px 50px;
+}
+
+footer .footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--slate);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ── Self-assessment specific ─────────────────────────────────*/
+
+.essay p {
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.essay h2.section-title {
+  margin-top: 36px;
+}
+
+blockquote.pull {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 19px;
+  color: var(--navy);
+  border-left: 3px solid var(--gold);
+  padding-left: 20px;
+  margin: 28px 0;
+}
+
+/* ── Back link ──────────────────────────────────────────────── */
+
+.back-link {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 13px;
+  margin-bottom: 28px;
+  color: var(--slate);
+  border-bottom: 1px dotted var(--hairline-strong);
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+
+@media (max-width: 600px) {
+  .masthead h1 { font-size: 30px; }
+  .spec-row { grid-template-columns: 1fr; gap: 4px; }
+  nav.site-nav .nav-inner { gap: 16px; }
+  main { padding: 32px 18px 60px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
